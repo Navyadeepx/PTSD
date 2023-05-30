@@ -1,4 +1,6 @@
 # PTSD
-WIP\n
-Python Tkinter Student Database\n
-ttkbootstrap needs to be installed\n
+WIP
+
+Python Tkinter Student Database
+
+ttkbootstrap needs to be installed
