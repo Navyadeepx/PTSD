@@ -24,7 +24,7 @@ def f0():
     Button(root, text="Update", command=f3).grid(row=0, column=2, sticky="EW")
     Button(root, text="Delete", command=f4).grid(row=0, column=3, sticky="EW")
 
-
+#enter
 def f1():
     f0()
     Grid.rowconfigure(root, 4, weight=0)
@@ -113,7 +113,7 @@ def f1():
 
 Button(root, text="Enter", command=f1).grid(row=0, column=0, sticky="EW")
 
-
+#search
 def f2():
     f0()
     Grid.rowconfigure(root, 4, weight=1)
@@ -170,7 +170,7 @@ def f2():
         param = c1.get()
         entry = str(e1.get())
         if entry == "showall":
-            fin = open("stu.bin", "rb")
+            fin = open("stu.bin", "ab+")
             try:
                 while True:
                     stu = pickle.load(fin)
@@ -184,7 +184,7 @@ def f2():
             except EOFError:
                 fin.close()
         else:
-            fin = open("stu.bin", "rb")
+            fin = open("stu.bin", "ab+")
             try:
                 while True:
                     stu = pickle.load(fin)
@@ -251,7 +251,7 @@ def f3():
     def f3_1():
         stu = {}
         found = False
-        fin = open("stu.bin", "rb")
+        fin = open("stu.bin", "ab+")
         entry = e1.get()
         try:
             while True:
@@ -307,7 +307,7 @@ def f3():
     def f3_2():
         x, y, z = e1.get(), c1.get(), e2.get()
         stu = {}
-        stufile = open("stu.bin", "rb")
+        stufile = open("stu.bin", "ab+")
         try:
             bin = open("temp.tmp", "ab")
             while True:
@@ -389,7 +389,7 @@ def f4():
     def f4_1():
         stu = {}
         found = False
-        fin = open("stu.bin", "rb")
+        fin = open("stu.bin", "ab+")
         entry = e1.get()
         try:
             while True:
@@ -434,7 +434,7 @@ def f4():
     def f4_2():
         x = e1.get()
         stu = {}
-        stufile = open("stu.bin", "rb")
+        stufile = open("stu.bin", "ab+")
         try:
             bin = open("temp.tmp", "ab")
             while True:
