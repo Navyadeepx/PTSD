@@ -3,3 +3,4 @@
 *.bin
 #backup
 *bak.py
+*notebok.py
