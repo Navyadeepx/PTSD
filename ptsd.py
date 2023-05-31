@@ -99,6 +99,7 @@ def e():
 			ef2l14.pack()
 			ef2l15.pack()
 		x+=1
+	#buttons
 	b2=CTkButton(ef1,text='Save',command=f)
 	b1=CTkButton(ef1,text='Refresh',command=e)
 	b1.grid(column=1,row=6,sticky='w')
