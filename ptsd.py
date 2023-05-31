@@ -62,6 +62,7 @@ def e():
 	def f():
 		nonlocal x
 		if x==0:
+			#display entered data
 			ef2f1=CTkFrame(ef2,height=30,width=50)
 			ef2f2=CTkFrame(ef2,height=30,width=50)
 			ef2f3=CTkFrame(ef2,height=30,width=50)
