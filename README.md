@@ -3,4 +3,6 @@ WIP
 
 Python Tkinter Student Database
 
-ttkbootstrap needs to be installed
+customtkinter needs to be installed
+
+or use pyinstaller executable
