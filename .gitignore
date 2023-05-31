@@ -1,6 +1,5 @@
 *.gitignore
-#.bin
 *.bin
-#backup
+*.ico
 *bak.py
 *notebok.py
