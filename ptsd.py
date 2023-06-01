@@ -99,14 +99,14 @@ def e():
 			ef2l13.pack()
 			ef2l14.pack()
 			ef2l15.pack()
-			stufile = open("stu.bin", "ab")
+			stufile = open('stu.bin', 'ab')
 			stu = {}
-			stu["roll no"] = e1.get()
-			stu["name"] = e2.get()
-			stu["class"] = e3.get()
-			stu["section"] = e4.get()
-			stu["d.o.b"] = e5.get()
-			stu["gender"] = e6.get()
+			stu['roll no.'] = e1.get()
+			stu['name'] = e2.get()
+			stu['class'] = e3.get()
+			stu['section'] = e4.get()
+			stu['d.o.b'] = e5.get()
+			stu['gender'] = e6.get()
 			pickle.dump(stu, stufile)
 		x+=1
 	x=0
@@ -123,20 +123,98 @@ def s():
 	sf1=CTkFrame(t.tab('Search'))
 	sf1.grid(column=0,row=0,sticky='ew')
 	#option menu function
-	def o1f(choice):
-		return choice
 	#option menu
 	o1=CTkOptionMenu(sf1,
-		  values=['Roll No.','Name','Class','Section','D.O.B','Gender'],
-		  command=o1f,
+		  values=['roll no.','name','class','section','d.o.b','gender'],
 		  width=110)
-	o1.set('Roll No.')
+	o1.set('roll no.')
 	o1.pack(side='left',padx=5)
 	#entry widget
 	e1=CTkEntry(sf1)
 	e1.pack(side='left',expand=True,fill='x',pady=5)
+	#go button function
+	def f():
+		nonlocal x
+		if x==0:
+			#display searched data
+			sf2f1=CTkFrame(sf2,height=30,width=50)
+			sf2f2=CTkFrame(sf2,height=30,width=50)
+			sf2f3=CTkFrame(sf2,height=30,width=50)
+			sf2f4=CTkFrame(sf2,height=30,width=50)
+			sf2f5=CTkFrame(sf2,height=30,width=50)
+			sf2f6=CTkFrame(sf2,height=30,width=50)
+			sf2f1.pack(side='left',expand=True,fill='both',padx=5,pady=5)
+			sf2f2.pack(side='left',expand=True,fill='both',padx=5,pady=5)
+			sf2f3.pack(side='left',expand=True,fill='both',padx=5,pady=5)
+			sf2f4.pack(side='left',expand=True,fill='both',padx=5,pady=5)
+			sf2f5.pack(side='left',expand=True,fill='both',padx=5,pady=5)
+			sf2f6.pack(side='left',expand=True,fill='both',padx=5,pady=5)			
+			sf2l1=CTkLabel(sf2f1,text='Roll No.')
+			sf2l2=CTkLabel(sf2f2,text='Name')
+			sf2l3=CTkLabel(sf2f3,text='Class')
+			sf2l4=CTkLabel(sf2f4,text='Section')
+			sf2l5=CTkLabel(sf2f5,text='D.O.B')
+			sf2l6=CTkLabel(sf2f6,text='Gender')
+			sf2l1.pack()
+			sf2l2.pack()
+			sf2l3.pack()
+			sf2l4.pack()
+			sf2l5.pack()
+			sf2l6.pack()
+			win.update()
+			found = False
+			if e1.get() == '/a':
+				fin= open('stu.bin', 'ab+')
+				fin.seek(0)
+				try:
+					while True:
+						stu = pickle.load(fin)
+						CTkLabel(sf2f1, text=stu['roll no.']).pack()
+						CTkLabel(sf2f2, text=stu['name']).pack()
+						CTkLabel(sf2f3, text=stu['class']).pack()
+						CTkLabel(sf2f4, text=stu['section']).pack()
+						CTkLabel(sf2f5, text=stu['d.o.b']).pack()
+						CTkLabel(sf2f6, text=stu['gender']).pack()
+				except EOFError:
+					fin.close()
+			else:
+				fin = open('stu.bin', 'ab+')
+				fin.seek(0)
+				try:
+					while True:
+						stu = pickle.load(fin)
+						if stu[o1.get()] == e1.get():
+							CTkLabel(sf2f1, text=stu['roll no.']).pack()
+							CTkLabel(sf2f2, text=stu['name']).pack()
+							CTkLabel(sf2f3, text=stu['class']).pack()
+							CTkLabel(sf2f4, text=stu['section']).pack()
+							CTkLabel(sf2f5, text=stu['d.o.b']).pack()
+							CTkLabel(sf2f6, text=stu['gender']).pack()
+							found = True
+				except EOFError:
+					fin.close()
+				finally:
+					if found == False:
+						sf2l1.destroy()
+						sf2l2.destroy()
+						sf2l3.destroy()
+						sf2l4.destroy()
+						sf2l5.destroy()
+						sf2l6.destroy()
+						sf2f1.destroy()
+						sf2f2.destroy()
+						sf2f3.destroy()
+						sf2f4.destroy()
+						sf2f5.destroy()
+						sf2f6.destroy()
+						l1 = CTkLabel(sf2, text='given entry not found')
+						l1.pack()
+
+		x+=1
+	x=0	
+	
 	#Go button
-	b1=CTkButton(sf1,text='Go',width=110) 
+	b1=CTkButton(sf1,text='Go',width=110,command=f) 
 	b1.pack(side='left',padx=5)
 	#Results lable
 	l1=CTkLabel(t.tab('Search'),text='Results')
@@ -145,7 +223,7 @@ def s():
 	sf2=CTkFrame(t.tab('Search'))
 	sf2.grid(column=0,row=3,sticky='news',pady=5)
 	#Refresh Button
-	b2=CTkButton(t.tab('Search'),text='Refresh',width=110)
+	b2=CTkButton(t.tab('Search'),text='Refresh',width=110,command=s)
 	b2.grid(column=0,row=4,sticky='e')
 s()
 win.mainloop()
