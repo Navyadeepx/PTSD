@@ -1,3 +1,4 @@
+import os
 import pickle 
 from tkinter import *
 from customtkinter import *
@@ -58,7 +59,6 @@ def e():
 	e5.grid(column=1,row=4,columnspan=3,sticky='ew')
 	e6.grid(column=1,row=5,columnspan=3,sticky='ew')
 	#save button function
-	x=0
 	def f():
 		nonlocal x
 		if x==0:
@@ -99,12 +99,53 @@ def e():
 			ef2l13.pack()
 			ef2l14.pack()
 			ef2l15.pack()
+			stufile = open("stu.bin", "ab")
+			stu = {}
+			stu["roll no"] = e1.get()
+			stu["name"] = e2.get()
+			stu["class"] = e3.get()
+			stu["section"] = e4.get()
+			stu["d.o.b"] = e5.get()
+			stu["gender"] = e6.get()
+			pickle.dump(stu, stufile)
 		x+=1
+	x=0
 	#buttons
-	b2=CTkButton(ef1,text='Save',command=f)
-	b1=CTkButton(ef1,text='Refresh',command=e)
+	b2=CTkButton(ef1,text='Save',command=f,width=110)
+	b1=CTkButton(ef1,text='Refresh',command=e,width=110)
 	b1.grid(column=1,row=6,sticky='w')
 	b2.grid(column=3,row=6,sticky='e')
 e()
-
+#Search
+def s():
+	Grid.columnconfigure(t.tab('Search'), 0, weight=1)
+	Grid.rowconfigure(t.tab('Search'), 3, weight=1)
+	sf1=CTkFrame(t.tab('Search'))
+	sf1.grid(column=0,row=0,sticky='ew')
+	#option menu function
+	def o1f(choice):
+		return choice
+	#option menu
+	o1=CTkOptionMenu(sf1,
+		  values=['Roll No.','Name','Class','Section','D.O.B','Gender'],
+		  command=o1f,
+		  width=110)
+	o1.set('Roll No.')
+	o1.pack(side='left',padx=5)
+	#entry widget
+	e1=CTkEntry(sf1)
+	e1.pack(side='left',expand=True,fill='x',pady=5)
+	#Go button
+	b1=CTkButton(sf1,text='Go',width=110) 
+	b1.pack(side='left',padx=5)
+	#Results lable
+	l1=CTkLabel(t.tab('Search'),text='Results')
+	l1.grid(column=0,row=2,sticky='ew')
+	#Results frame
+	sf2=CTkFrame(t.tab('Search'))
+	sf2.grid(column=0,row=3,sticky='news',pady=5)
+	#Refresh Button
+	b2=CTkButton(t.tab('Search'),text='Refresh',width=110)
+	b2.grid(column=0,row=4,sticky='e')
+s()
 win.mainloop()
