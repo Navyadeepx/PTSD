@@ -1,1 +1,3 @@
 run the PTSD shortcurt or go to pyhton files folder and find ptsd.exe
+
+GitHub - https://github.com/Navyadeepx/PTSD
