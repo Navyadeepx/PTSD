@@ -1,0 +1,1 @@
+run the PTSD shortcurt or go to pyhton files folder and find ptsd.exe
